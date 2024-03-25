@@ -8,20 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>RISE: 3D Perception Makes Real-World Imitation Simple and Effective</title>
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
 
@@ -91,14 +77,18 @@
           
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://tonyfang.net/">Chenxi Wang</a><sup>1</sup>,</span>
+              <a href="https://github.com/chenxi-wang">Chenxi Wang</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://www.mvig.org/">Cewu Lu</a><sup>1,2</sup>
+              <a href="https://tonyfang.net/">Hongjie Fang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://fang-haoshu.github.io/">Hao-Shu Fang</a><sup>2</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.mvig.org/">Cewu Lu</a><sup>2</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <sup>1</sup><span class="author-block">Flexiv Robotics</span>, <sup>2</sup><span class="author-block">Shanghai Jiao Tong University</span>
+            <sup>1</sup><span class="author-block">Shanghai Noematrix Intelligence Technology Ltd</span>, <sup>2</sup><span class="author-block">Shanghai Jiao Tong University</span>
           </div>
 
           <div class="column has-text-centered">
@@ -123,16 +113,6 @@
                   <span>Code (coming soon)</span>
                   </a>
               </span>
-              <!--TODO: fill data--> 
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fa fa-database"></i>
-                  </span>
-                  <span>Sample Data</span>
-                </a>
-              </span>
             </div>
           </div>
         </div>
@@ -141,14 +121,23 @@
   </div>
 </section>
 
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img id="teaser" src="static/images/teaser.jpg"></img>
+    </div>
+  </div>
+</section>
+
+
 <section class="section">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3"><a id="abstract">Abstract</a></h2>
+        <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            <!-- TODO: abstract -->
+            Precise robot manipulations require rich spatial information in imitation learning. Image-based policies model object positions from fixed cameras, which are sensitive to camera view changes. Policies utilizing 3D point clouds usually predict keyframes rather than continuous actions, posing difficulty in frequently changing scenarios. To utilize 3D perception efficiently, we present RISE, an end-to-end baseline for real-world imitation learning, which predicts continuous actions directly from single-view point clouds. It compresses the point cloud to tokens with a sparse 3D encoder. After adding sparse positional encoding, the tokens are then featurized using a transformer. Finally, the features are decoded into robot actions by a diffusion head. Trained with 50 demonstrations for each real-world task, RISE surpasses currently representative 2D and 3D policies by a large margin, showcasing significant advantages in both accuracy and efficiency. Experiments also demonstrate that RISE is more general and robust to environmental change compared with previous baselines.
           </p>
         </div>
       </div>
@@ -158,131 +147,418 @@
 </section>
 
 
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+          <img id="model" src="static/images/model.jpg"></img>
+          <br><br>
+          <div class="content has-text-justified">
+            <p>
+            The input of RISE is a noisy point cloud captured from the real world. A 3D encoder built with sparse convolution is employed to compress the point cloud into point tokens. The tokens are fed into the transformer encoder after adding sparse positional encoding. A readout token is used to query the action features from the transformer decoder. Conditioned on the action features, the Gaussian samples are denoised into continuous actions iteratively using a diffusion head.
+            </p>  
+          </div>
+        </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Evaluations</h2>
+        <div class="content has-text-justified">
+          <p>
+            We carefully designed 6 tasks from 4 types for the experiments: the <i>pick-and-place</i> tasks (<b>Collect Cups</b> and <b>Collect Pens</b>), the <i>6-DoF</i> tasks (<b>Pour Balls</b>), the <i>push-to-goal</i> tasks (<b>Push Block</b> and <b>Push Ball</b>) and the <i>long-horizon</i> tasks (<b>Stack Blocks</b>). We evaluate RISE and various baselines (2D: <a href="https://tonyzhaozh.github.io/aloha">ACT</a> and <a href="https://diffusion-policy.cs.columbia.edu/">Diffusion Policy</a>; 3D: <a href="https://act3d.github.io/">Act3D</a> and <a href="https://3d-diffusion-policy.github.io/">DP3</a>) on these tasks.
+            
+            In the following sections, all the videos are <b>autonomous rollouts</b> of the RISE policy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="results-pick-and-place">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-4"><a id="pick-and-place">Pick-and-Place Tasks</a></h2>
+        <h2 class="title is-4">Pick-and-Place Tasks</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Collect Cups.</b> Collect the cups into the large metal cup.
 
-        <div class="hero-body">
-          <div class="container">
-            <div id="results-cup" class="carousel results-carousel">
-              <div class="item item-cup1">
-                <video id="cup1-1"  autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup1-1-final.mp4"
+            <div class="columns is-centered has-text-centered"><img src="static/images/collect-cups.png" style="height:200px"></img></div>
+            <div id="results-collect-cups" class="carousel results-carousel">
+              <div class="item item-collect-cups1">
+                <video id="collect-cups1-1"  autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/1-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="cup1-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup1-2-final.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
-              <div class="item item-cup2">
-                <video id="cup2-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup2-1-final.mp4"
-                          type="video/mp4">
-                </video>
-                <video id="cup2-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup2-2-final.mp4"
+                <video id="collect-cups1-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/1-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
-              <div class="item item-cup3">
-                <video id="cup3-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup3-1-final.mp4"
+              <div class="item item-collect-cups2">
+                <video id="collect-cups2-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/2-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="cup3-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup3-2-final.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
-              <div class="item item-cup4">
-                <video id="cup4-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup4-1-final.mp4"
-                          type="video/mp4">
-                </video>
-                <video id="cup4-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup4-2-final.mp4"
+                <video id="collect-cups2-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/2-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
-              <div class="item item-cup5">
-                <video id="cup5-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup5-1-final.mp4"
+              <div class="item item-collect-cups3">
+                <video id="collect-cups3-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/3-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="cup5-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/cup/cup5-2-final.mp4"
+                <video id="collect-cups3-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/3-2-final.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-collect-cups4">
+                <video id="collect-cups4-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/4-1-final.mp4"
+                          type="video/mp4">
+                </video>
+                <video id="collect-cups4-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/4-2-final.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-collect-cups5">
+                <video id="collect-cups5-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/5-1-final.mp4"
+                          type="video/mp4">
+                </video>
+                <video id="collect-cups5-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-cups/5-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
             </div>
-          </div>
+          </p>
         </div>
+        
+
+        <br>
+        <div class="content has-text-justified">
+          <p>
+            <b>Collect Pens.</b> Collect the marker pens into the bowl.
+
+            <div class="columns is-centered has-text-centered"><img src="static/images/collect-pens.png" style="height:200px"></img></div>
 
 
-        <div class="hero-body">
-          <div class="container">
-            <div id="results-pen" class="carousel results-carousel">
-              <div class="item item-pen1">
-                <video id="pen1-1"  autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen1-1-final.mp4"
+            <div id="results-collect-pens" class="carousel results-carousel">
+              <div class="item item-collect-pens1">
+                <video id="collect-pens1-1"  autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/1-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="pen1-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen1-2-final.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
-              <div class="item item-pen2">
-                <video id="pen2-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen2-1-final.mp4"
-                          type="video/mp4">
-                </video>
-                <video id="pen2-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen2-2-final.mp4"
+                <video id="collect-pens1-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/1-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
-              <div class="item item-pen3">
-                <video id="pen3-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen3-1-final.mp4"
+              <div class="item item-collect-pens2">
+                <video id="collect-pens2-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/2-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="pen3-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen3-2-final.mp4"
-                          type="video/mp4">
-                </video>
-              </div>
-              <div class="item item-pen4">
-                <video id="pen4-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen4-1-final.mp4"
-                          type="video/mp4">
-                </video>
-                <video id="pen4-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen4-2-final.mp4"
+                <video id="collect-pens2-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/2-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
-              <div class="item item-pen5">
-                <video id="pen5-1" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen5-1-final.mp4"
+              <div class="item item-collect-pens3">
+                <video id="collect-pens3-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/3-1-final.mp4"
                           type="video/mp4">
                 </video>
-                <video id="pen5-2" autoplay muted loop playsinline>
-                  <source src="./static/videos/pen/pen5-2-final.mp4"
+                <video id="collect-pens3-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/3-2-final.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-collect-pens4">
+                <video id="collect-pens4-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/4-1-final.mp4"
+                          type="video/mp4">
+                </video>
+                <video id="collect-pens4-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/4-2-final.mp4"
+                          type="video/mp4">
+                </video>
+              </div>
+              <div class="item item-collect-pens5">
+                <video id="collect-pens5-1" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/5-1-final.mp4"
+                          type="video/mp4">
+                </video>
+                <video id="collect-pens5-2" autoplay muted loop playsinline>
+                  <source src="./static/videos/collect-pens/5-2-final.mp4"
                           type="video/mp4">
                 </video>
               </div>
             </div>
-          </div>
+          </p>
+          <br><br>
         </div>
-
-          
       </div>
     </div>
-    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="results-6dof">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">6-DoF Tasks</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Pour Balls.</b> Grasp the cup, pour the balls in the cup to the bowl, and drop the cup into the basket.
+            <br><br>
+            <div class="columns is-centered has-text-centered"><img src="static/images/pour-balls.png" style="height:120px"></img></div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <video id="pour-balls-4" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/pour-balls/4-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="pour-balls-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/pour-balls/3-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="pour-balls-1" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/pour-balls/1-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="pour-balls-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/pour-balls/2-final.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="results-push-to-goal">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Push-to-Goal Tasks (with Tool)</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Push Block.</b> Push the block into the goal area using the gripper.
+            <br>
+            <b>Push Ball.</b> Push the soccer ball into the goal area using the marker pen.
+
+            <br><br>
+
+            <div class="columns is-centered has-text-centered"><img src="static/images/push-to-goal.png" style="height:120px"></img></div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <video id="push-block-1" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-block/4-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-block-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-block/2-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-block-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-block/3-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-block-4" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-block/1-final.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <video id="push-ball-1" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-ball/1-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-ball-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-ball/2-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-ball-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-ball/3-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="push-ball-4" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/push-ball/4-final.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="results-long-horizon">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Long Horizon Tasks</h2>
+        <div class="content has-text-justified">
+          <p>
+            <b>Stack Blocks.</b> Stack the blocks together in the order of block size.
+            <br><br>
+            <div class="columns is-centered has-text-centered"><img src="static/images/stack-blocks.png" style="height:120px"></img></div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <video id="stack-blocks-2-1"  autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/2-1-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="stack-blocks-3-1" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/3-1-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="stack-blocks-4-1" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/4-1-final.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="columns is-centered has-text-centered">
+              <video id="stack-blocks-2-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/2-2-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="stack-blocks-3-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/3-2-final.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="stack-blocks-4-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/stack-blocks/4-2-final.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <br><br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results-3d-perception">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Effectiveness of 3D Perception</h2>
+        <div class="content has-text-justified">
+          <p>
+            We explore how 3D perception enhances the performance of robot manipulation policies on the <b>Collect Cups</b> task with 5 cups. We replace the vision encoders in image-based policies Diffusion Policy and ACT with our 3D perception module. We observe a significant improvement in the performance of ACT and Diffusion Policy after applying 3D perception, even surpassing the 3D policy Act3D and recently proposed DP3, which reflects the effectiveness of our 3D perception module in manipulation policies.
+            <br><br>
+            <div class="columns is-centered has-text-centered"><img src="static/images/3d.png" style="height:192px"></img></div>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results-generalization-test">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">Generalization Test</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate the generalization ability of different methods on the <b>Collect Pens</b> task with 1 pen under different levels of environmental disturbances as follows.
+            <ul>
+            <li><b>L1</b>. Generalize to objects with similar shapes but different colors. In this task, we replace the original green bowl with a pink one, which is denoted as <b>Bowl</b>.</li>
+            <li><b>L2</b>. Generalize to different light conditions in the environment, denoted as <b>Light</b>.</li>
+            <li><b>L3</b>. Generalize to new workspace configurations in the environment. In this task, we elevate the workspace by 13cm to form a new workspace configuration, which is denoted as <b>Height</b>.</li>
+            <li><b>L4</b>. Generalize to new camera settings in the environment, denoted as <b>Camera</b>.</li>  
+            </ul>
+            <br>
+            <div class="columns is-centered has-text-centered"><img src="static/images/generalization.png"></img></div>
+            <br>
+            <div class="columns is-centered has-text-centered">
+              <video id="generalization-1-1"  autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-1-1.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-1-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-1-2.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-1-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-1-3.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="columns is-centered has-text-centered">
+              <video id="generalization-2-1"  autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-2-1.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-2-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-2-2.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-2-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-2-3.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="columns is-centered has-text-centered">
+              <video id="generalization-3-1"  autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-3-1.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-3-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-3-2.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-3-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-3-3.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <div class="columns is-centered has-text-centered">
+              <video id="generalization-4-1"  autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-4-1.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-4-2" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-4-2.mp4"
+                        type="video/mp4">
+              </video>
+              <video id="generalization-4-3" autoplay muted loop playsinline style="width:235px">
+                <source src="./static/videos/generalization/final-4-3.mp4"
+                        type="video/mp4">
+              </video>
+            </div>
+            <br><br>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -292,8 +568,14 @@
     <div class="columns is-centered has-text-centered">
     <h2 class="title">BibTeX</h2>
     </div>
-    <pre><code> <!--TODO:bibtex-->
-</code></pre>
+    <pre><code>
+@article{wang2024rise,
+    title   = {RISE: 3D Perception Makes Real-World Imitation Simple and Effective},
+    author  = {Chenxi Wang and Hongjie Fang and Hao-Shu Fang and Cewu Lu},
+    journal = {arXiv preprint},
+    year    = {2024}
+}
+    </code></pre>
   </div>
 </section>
 

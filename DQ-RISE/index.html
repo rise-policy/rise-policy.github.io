@@ -1,0 +1,777 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<!-- ======================================================================= -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js" type="text/javascript"></script>
+<style type="text/css">
+  body {
+    font-family: "Crimson Text","HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight:300;
+    font-size:18px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
+
+  pre {
+    background-color: #f6f8fa;
+    padding: 16px;
+  }
+
+  code {
+    font-family: "SFMono-Regular","Consolas","Liberation Mono","Menlo",monospace;
+    overflow: scroll;
+  }
+
+  .description {
+    max-width: 1000px;
+    padding: 0px;
+  }
+
+  h1 {
+    font-family: "Source Sans Pro";
+    font-weight:300;
+  }
+
+  div {
+    max-width: 95%;
+    margin:auto;
+    padding: 10px;
+  }
+
+  .table-like {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .box {
+    padding: 0px;
+    text-align: center;
+    width: 50%;
+  }
+
+  @media screen and (max-width: 1279px) {
+    .box {
+      width: 100%;
+    }
+  }
+
+      .table-like hr {
+          width: 100%;
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
+    border: 0;
+      }
+
+  .disclaimerbox {
+    background-color: #eee;
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    padding: 20px;
+  }
+
+  video.header-vid {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img {
+    padding: 0;
+    display: block;
+    margin: 0 auto;
+    max-height: 100%;
+    max-width: 100%;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
+
+  img.header-img {
+    height: 140px;
+    border: 1px solid black;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  img.rounded {
+    border: 1px solid #eeeeee;
+    border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+  }
+
+  a:link,a:visited
+  {
+    color: #1367a7;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #208799;
+  }
+
+  td.dl-link {
+    height: 160px;
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+            15px 15px 0 0px #fff, /* The fourth layer */
+            15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+            20px 20px 0 0px #fff, /* The fifth layer */
+            20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+            25px 25px 0 0px #fff, /* The fifth layer */
+            25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+    margin-left: 10px;
+    margin-right: 45px;
+  }
+
+
+  .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+    box-shadow:
+            0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+            5px 5px 0 0px #fff, /* The second layer */
+            5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+            10px 10px 0 0px #fff, /* The third layer */
+            10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-bottom: 5px;
+  }
+
+  .vert-cent {
+    position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+
+  hr
+  {
+    border: 0;
+    height: 1px;
+    max-width: 1100px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  }
+
+  #authors td {
+    padding-bottom:5px;
+    padding-top:30px;
+  }
+
+  .mySlides {display: none}
+
+  /* Slideshow container */
+  .slideshow-container {
+    max-width: 1280px;
+    position: relative;
+    margin: auto;
+  }
+
+#videos h1 {
+  margin-bottom: 0.05em;  /* 或者直接 5px，看字号而定 */
+}
+
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  /* Caption text */
+  .caption {
+    color: #000000;
+    font-size: 25;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+  }
+
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #000000;
+    font-size: 18px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+
+  /* Fading animation */
+  .fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+  }
+
+  /* On smaller screens, decrease text size */
+  @media only screen and (max-width: 300px) {
+    .prev, .next,.text {font-size: 11px}
+  }
+</style>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<head>
+<div max-width=100%>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Learning Dexterous Manipulation with Quantized Hand State</title>
+<meta name="HandheldFriendly" content="True" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="referrer" content="no-referrer-when-downgrade" />
+</head>
+
+<body>
+    <div style="max-width:900px">
+
+    </div>
+    <br>
+    <center><span style="font-size:44px;font-weight:bold;font-family:Source Sans Pro;">Learning Dexterous Manipulation <br> with Quantized Hand State</span></center><br/>
+    <div class="table-like" style="justify-content:space-evenly;max-width:900px;margin:auto;">
+        <hr>
+        <center><span style="font-size:25px" class="line-break"><a href="mailto:fyyy0407@sjtu.edu.cn">Ying Feng*</a>&nbsp;&nbsp;&nbsp;<a href="https://tonyfang.net/">Hongjie Fang*</a>&nbsp;&nbsp;&nbsp;<a href="https://hyn-kulu.github.io/">Yinong He*</a><br><a href="https://github.com/Junxix">Jingjing Chen</a>&nbsp;&nbsp;&nbsp;<a href="https://scholar.google.com/citations?user=bK1fWXcAAAAJ">Chenxi Wang</a>&nbsp;&nbsp;&nbsp;<a href="https://alan-heoooh.github.io/">Zihao He&nbsp;&nbsp;&nbsp;<a href="https://ruonanliu.com/">Ruonan Liu</a>&nbsp;&nbsp;&nbsp;<a href="https://www.mvig.org/">Cewu Lu</a></span></center>
+    </div>
+    <div class="table-like" style="justify-content:space-evenly;max-width:900px;margin:auto;">
+        <hr>
+        <center><span style="font-size:20px" class="line-break">Shanghai Jiao Tong University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Noematrix<br>Shanghai Innovation Institute&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Carnegie Mellon University</span></center>
+    </div>
+    <div class="table-like" style="justify-content:space-evenly;max-width:900px;margin:auto;">
+        <hr>
+        <center><span style="font-size:20px" class="line-break">*Equal Contribution</span></center>
+    </div>
+
+    <div class="table-like" style="justify-content:space-evenly;max-width:900px;margin:auto;">
+        <hr>
+        <center><span style="font-size:25px" class="line-break">&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><u>[Paper Coming Soon]</u></a></span><span style="font-size:25px" class="line-break">&nbsp;&nbsp;&nbsp;&nbsp;<a href=""><u>[Code Coming Soon]</u></a></span></center>
+    </div>
+
+    <div class="table-like" style="justify-content:space-evenly;max-width:900px;margin:auto;">
+        <hr>
+    </div>
+    
+    <div style="width:800px; margin:0 auto" align="justify">
+    <p>
+        <b>Abstract.</b> Dexterous robotic hands enable robots to perform complex manipulations that require fine-grained control and adaptability. Achieving such manipulation is challenging because the high degrees of freedom tightly couple hand and arm motions, making learning and control difficult. Successful dexterous manipulation relies not only on precise hand motions, but also on accurate spatial positioning of the arm and coordinated arm-hand dynamics. However, most existing visuomotor policies represent arm and hand actions in a single combined space, which often causes high-dimensional hand actions to dominate the coupled action space and compromise arm control. To address this, we propose <em>DQ-RISE</em>, which quantizes hand states to simplify hand motion prediction while preserving essential patterns, and applies a continuous relaxation that allows arm actions to diffuse jointly with these compact hand states. This design enables the policy to learn arm-hand coordination from data while preventing hand actions from overwhelming the action space. Experiments show that <em>DQ-RISE</em> achieves more balanced and efficient learning, paving the way toward structured and generalizable dexterous manipulation.
+    </p>
+    </div>
+
+
+
+    <div style="max-width:900px">
+      <hr>
+      <center id="videos"><h1>DQ-RISE Policy Architecture</h1></center>
+        <p>
+            Existing visuomotor policies often suffer from <strong>imbalanced learning</strong>, where high-dimensional hand actions dominate and arm localization is compromised. Naively separating arm and hand predictions, however, breaks coordination. We address this with <em>DQ-RISE</em> policy, which builds on the RISE policy and introduces <em>Quantizing hand state into compact patterns</em> via residual VQ-VAE. To preserve structure, we apply a <em>continuous relaxation</em> that orders the quantized states coherently. This compact representation allows precise arm control and <em>smooth arm-hand coordination</em> for dexterous manipulation.
+      </p>
+
+      <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+        <img src="resources/image/policy.png" alt="policy" style="width:900px;">
+      </div>
+    </div>
+
+    <div style="max-width:900px">
+      <hr>
+      <center id="videos"><h1>Robot Platform and Hybrid Dexterous Teleoperation System</h1></center>
+        <p>
+            Our platform consists of a Flexiv robotic arm equipped with an <strong>ROHand</strong>. During teleoperation, the arm is controlled via a VR joystick, where the joystick button can be used to pause arm motion and adjust the joystick pose for more intuitive and convenient operation. For hand control, we use a <strong> GForce </strong> glove to directly operate the ROHand using joint correspondence.
+      </p>
+
+      <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+        <img src="resources/image/data_collection.png" alt="policy" style="width:900px;">
+      </div>
+    </div>
+
+
+
+    <div style="max-width:900px">
+      <hr>
+      <center id="videos"><h1>Experiments</h1></center>
+      <p>
+        
+      </p>
+
+     
+
+      <p>
+        <!-- We carefully designed 7 real-world manipulation tasks that feature multiple repeated or difficult-to-distinguish states across different horizons, aiming to evaluate both the history-awareness and overall performance of visuomotor policies. The tasks collectively evaluate several aspects of history-awareness, including <em>counting</em>, <em>spatial memorization</em>, <em>task stage identification</em>, <em>pre-loaded memory</em> and <em>continuous memory</em>. -->
+         We design 6 tasks to evaluate the policies on dexterous manipulation in the real world, including pick-and-place operations, articulated object manipulation, tasks with significant rotations, and long-horizon tasks.
+      </p>
+
+       <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+        <img src="resources/image/tasks.png" alt="task figure" style="width:900px;">
+      </div>
+
+      <p>
+        <p>
+    We compare our <strong><em>DQ-RISE</em></strong> policy against three baselines for integrating 
+    dexterous hand action prediction:
+  </p>
+  <ol>
+    <li>
+      The base visuomotor policy (<em>RISE</em>), which predicts concatenated arm-hand action chunks.
+    </li>
+    <li>
+      The base visuomotor policy with separate diffusions (<em>RISE-S</em>), which uses two diffusion 
+      heads for arm and hand action generation.
+    </li>
+    <li>
+      The base visuomotor policy with quantized hand action classification (<em>DQ-RISE-C</em>), 
+      which diffuses arm actions first and then classifies quantized hand actions using action 
+      features and the predicted arm action.
+    </li>
+  </ol>
+      </p>
+      <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+        <img src="resources/image/results.png" alt="results" style="width:900px;">
+      </div>
+    <p>
+        Experiments demonstrate that <em>DQ-RISE</em> consistently outperforms alternative prediction schemes, achieving high success rates across diverse tasks including long-horizon and contact-rich 
+    manipulations.
+    </p>
+    </div>
+
+
+    <div style="max-width:900px">
+      <hr>
+      <center id="videos"><h1>Quantized Hand State after Re-Indexing</h1></center>
+        <p>
+           Hand states are projected into 3D points via UMAP, with selected points annotated by their corresponding hand poses for reference. The figure illustrates that reindexing in the continuous relaxation process makes code transitions continuous and interpretable in the hand states, supporting further joint diffusing of arm & quantized hand actions.
+      </p>
+
+      <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+        <img src="resources/image/code_visual.png" alt="policy" style="width:800px;">
+      </div>
+    </div>
+
+
+
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+      <hr>
+      
+      <center id="videos"><h1><strong>Pull Tissue</strong></h1></center>
+      <div class="slideshow-container" id="add-salt-container">
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/pull-tissue/scene1.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/pull-tissue/scene2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/pull-tissue/scene3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <a class="prev" onclick="slideshow7.plusSlides(-1)">❮</a>
+        <a class="next" onclick="slideshow7.plusSlides(1)">❯</a>
+      </div>
+      <br>
+      <div id="add-salt-dots" style="text-align:center">
+        <span class="dot" onclick="slideshow7.currentSlide(1)"></span> 
+        <span class="dot" onclick="slideshow7.currentSlide(2)"></span> 
+        <span class="dot" onclick="slideshow7.currentSlide(3)"></span> 
+      </div>
+
+  </div>
+
+
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+        <hr>
+        
+        <center id="videos"><h1><strong>Open Jar</strong></h1></center>
+        <div class="slideshow-container" id="one-move-container">
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/open-jar/scene1.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+         
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/open-jar/scene2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+  
+          
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/open-jar/scene3.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          
+          <a class="prev" onclick="slideshow3.plusSlides(-1)">❮</a>
+          <a class="next" onclick="slideshow3.plusSlides(1)">❯</a>
+        </div>
+        <br>
+        <div id="one-move-dots" style="text-align:center">
+          <span class="dot" onclick="slideshow3.currentSlide(1)"></span> 
+          <span class="dot" onclick="slideshow3.currentSlide(2)"></span> 
+          <span class="dot" onclick="slideshow3.currentSlide(3)"></span> 
+        </div>
+  
+    </div>
+
+    
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+        <hr>
+        <center id="videos"><h1><strong>Collect Toy</strong></h1></center>
+  
+        <div class="slideshow-container" id="swap-easy-container">
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/collect-toy/scene1.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+  
+  
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/collect-toy/scene2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/collect-toy/scene3.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+  
+          <a class="prev" onclick="slideshow2.plusSlides(-1)">❮</a>
+          <a class="next" onclick="slideshow2.plusSlides(1)">❯</a>
+        </div>
+        <br>
+        <div id="swap-easy-dots" style="text-align:center">
+          <span class="dot" onclick="slideshow2.currentSlide(1)"></span> 
+          <span class="dot" onclick="slideshow2.currentSlide(2)"></span> 
+          <span class="dot" onclick="slideshow2.currentSlide(3)"></span> 
+        </div>
+  
+    </div>
+
+
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+        <hr>
+        <center id="videos"><h1><strong>Pour Rice</strong></h1></center>
+  
+        <div class="slideshow-container" id="three-scoop-container">
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/pour-rice/scene1.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/pour-rice/scene2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/pour-rice/scene3.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <a class="prev" onclick="slideshow4.plusSlides(-1)">❮</a>
+          <a class="next" onclick="slideshow4.plusSlides(1)">❯</a>
+        </div>
+        <br>
+        <div id="three-scoop-dots" style="text-align:center">
+          <span class="dot" onclick="slideshow4.currentSlide(1)"></span> 
+          <span class="dot" onclick="slideshow4.currentSlide(2)"></span> 
+          <span class="dot" onclick="slideshow4.currentSlide(3)"></span> 
+        </div>
+  
+    </div>
+
+
+
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+      <hr>
+      <center id="videos"><h1><strong>Open Oven</i></h1></center>
+      <!--
+      <div class="description">
+        <p>
+        </p>
+      </div>
+      -->
+      <div class="slideshow-container" id="swap-hard-container">
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/open-oven/scene1.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/open-oven/scene2.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="mySlides fade">
+          <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+            <div>
+              <video width="800" autoplay muted playsinline controls>
+                  <source src="resources/video/open-oven/scene3.mp4" type="video/mp4">
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <a class="prev" onclick="slideshow1.plusSlides(-1)">❮</a>
+        <a class="next" onclick="slideshow1.plusSlides(1)">❯</a>
+      </div>
+      <br>
+      <div id="swap-hard-dots" style="text-align:center">
+        <span class="dot" onclick="slideshow1.currentSlide(1)"></span> 
+        <span class="dot" onclick="slideshow1.currentSlide(2)"></span> 
+        <span class="dot" onclick="slideshow1.currentSlide(3)"></span> 
+      </div>
+    </div>
+
+
+    <div style="width:1280; margin:0 auto; text-align:left" align="left">
+        <hr>
+        <center id="videos"><h1><strong>Toast Bread</strong></h1></center>
+  
+        <div class="slideshow-container" id="guess-easy-container">
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/toast-bread/scene1.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+  
+      <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/toast-bread/scene2.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+
+          <div class="mySlides fade">
+            <div class="table-like" style="justify-content:space-evenly;margin:auto;padding:0px;">
+              <div>
+                <video width="800" autoplay muted playsinline controls>
+                    <source src="resources/video/toast-bread/scene3.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <a class="prev" onclick="slideshow5.plusSlides(-1)">❮</a>
+          <a class="next" onclick="slideshow5.plusSlides(1)">❯</a>
+        </div>
+        <br>
+        <div id="guess-easy-dots" style="text-align:center">
+          <span class="dot" onclick="slideshow5.currentSlide(1)"></span> 
+          <span class="dot" onclick="slideshow5.currentSlide(2)"></span> 
+          <span class="dot" onclick="slideshow5.currentSlide(3)"></span> 
+        </div>
+  
+    </div>
+
+
+    <div style="max-width:900px">
+      <div class="description">
+        <p>
+          <p align="right">
+          Website template: <a href="https://bland.website/">Allan Zhou</a>
+          <br>
+          Modified from <a href="https://tonyzhaozh.github.io/aloha/">ALOHA @ Tony Z. Zhao</a>
+        </p>
+      </div>
+
+    </div> 
+
+
+
+
+    <script>
+      const Slideshow = {
+        slideIndex: 1,
+        name: "",
+        plusSlides(n) {
+          this.showSlides(this.slideIndex += n);
+        },
+        currentSlide(n) {
+          this.showSlides(this.slideIndex = n);
+        },
+        showSlides(n) {
+          let i;
+          let container = document.getElementById(this.name + "-container")
+          let slides = container.getElementsByClassName("mySlides");
+          let dots = document.getElementById(this.name + "-dots").getElementsByClassName("dot");
+          if (n > slides.length) {this.slideIndex = 1}    
+          if (n < 1) {this.slideIndex = slides.length}
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";  
+          }
+          for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          slides[this.slideIndex-1].style.display = "block";  
+          dots[this.slideIndex-1].className += " active";
+        }
+      }
+
+      slideshow1 = Object.create(Slideshow);
+      slideshow1.name = "swap-hard"
+      slideshow1.showSlides(slideshow1.slideIndex);
+
+      slideshow2 = Object.create(Slideshow);
+      slideshow2.name = "swap-easy"
+      slideshow2.showSlides(slideshow2.slideIndex);
+
+      slideshow3 = Object.create(Slideshow);
+      slideshow3.name = "one-move"
+      slideshow3.showSlides(slideshow3.slideIndex);
+
+      slideshow4 = Object.create(Slideshow);
+      slideshow4.name = "three-scoop"
+      slideshow4.showSlides(slideshow4.slideIndex);
+
+      slideshow5 = Object.create(Slideshow);
+      slideshow5.name = "guess-easy"
+      slideshow5.showSlides(slideshow5.slideIndex);
+
+
+      slideshow7 = Object.create(Slideshow);
+      slideshow7.name = "add-salt"
+      slideshow7.showSlides(slideshow7.slideIndex);
+    </script>
+
+
+</body>
+</html>
